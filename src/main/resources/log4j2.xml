@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- status : 指定log4j本身的打印日志的级别.ALL< Trace < DEBUG < INFO < WARN < ERROR
+    < FATAL < OFF。可以设置成OFF(关闭)或Error(只输出错误信息);
+     monitorInterval : 用于指定log4j自动重新配置的监测间隔时间，单位是s,最小是5s. -->
+<configuration status="OFF" monitorInterval="180">
+
+    <!-- 配置日志文件输出目录，方便后面引用 -->
+    <Properties>
+        <Property name="LOG_HOME">D:/workspace/workspace-sts/backupOracle/logs</Property>
+        <property name="ERROR_LOG_FILE_NAME">D:/workspace/workspace-sts/backupOracle/logs/error</property>
+        <property name="WARN_LOG_FILE_NAME">D:/workspace/workspace-sts/backupOracle/logs/warn</property>
+    </Properties>
+
+    <!--先定义所有的appender-->
+    <appenders>
+        <!-- 这个输出控制台的配置 -->
+        <console name="Console" target="SYSTEM_OUT">
+            <!-- 控制台只输出level及以上级别的信息(onMatch),其他的直接拒绝(onMismatch) -->
+            <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!-- 输出日志的格式 -->
+            <patternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>
+        </console>
+
+        <!--文件会打印出所有信息，这个log每次运行程序会自动清空，由append属性决定是否清空 适合临时测试用
+        append为TRUE表示消息增加到指定文件中，false表示消息覆盖指定的文件内容，默认值是true-->
+        <File name="FileWarn" fileName="${WARN_LOG_FILE_NAME}/warn.log" append="false">
+            <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!-- 输出日志的格式 -->
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+
+        <!--　RollingFile节点用来定义超过指定大小自动删除旧的创建新的的Appender.-->
+        <RollingFile name="RollingFileError" fileName="${ERROR_LOG_FILE_NAME}/error.log"
+                     filePattern="${sys:user.home}/logs/$${date:yyyy-MM}/error-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+        </RollingFile>
+    </appenders>
+
+    <!--然后定义logger，只有定义了logger并引入的appender，appender才会生效-->
+    <loggers>
+        <!--日志实例(DEBUG),root将日志输出控制台-->
+        <root level="DEBUG">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="RollingFileError"/>
+        </root>
+
+    </loggers>
+</configuration>
