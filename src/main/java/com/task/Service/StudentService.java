@@ -18,4 +18,5 @@ public interface StudentService {
     Student findStudentById(long id);
     //查询所有学生数据
     List<Student> findAllStudent();
+
 }

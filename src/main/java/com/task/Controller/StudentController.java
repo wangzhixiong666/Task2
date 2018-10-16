@@ -1,5 +1,7 @@
 package com.task.Controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.task.Service.StudentService;
 import com.task.pojo.Student;
 import org.apache.logging.log4j.LogManager;
@@ -13,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -94,10 +97,14 @@ public class StudentController {
     /**
      * 查询学生所有数据
      */
-    @RequestMapping(value ="/findAllStudent",method = RequestMethod.GET)
-    public String findAllStudent(Model model){
-        List<Student>students=studentService.findAllStudent();
-        model.addAttribute("studentList",students);
+    //分页查询
+    @RequestMapping(value = "/findAllStudent", method =RequestMethod.GET)
+    public String findAllStudent(Model model, @RequestParam(defaultValue = "1",required = true,value = "pageNo")Integer pageNo)  {
+        Integer pageSize=5;//每页显示记录数为5
+        PageHelper.startPage(pageNo,pageSize);
+        List<Student>studentList=studentService.findAllStudent();//获取所有用户信息
+        PageInfo<Student>pageInfo=new PageInfo<Student>(studentList);
+        model.addAttribute("pageInfo",pageInfo);
         return "studentInfo";
     }
 }

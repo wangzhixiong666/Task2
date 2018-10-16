@@ -74,7 +74,7 @@ public class JsonController {
     @RequestMapping(value = "/findAllStudent",method = RequestMethod.GET)
     @ResponseBody
     public List<Student> findAllStudent(){
-        List<Student>students=studentService.findAllStudent();
-        return students;
+//     findAllStudent   List<Student>students=studentService.findAllStudent();
+        return null;
     }
 }

@@ -9,7 +9,7 @@ public class LongConverter implements Converter<String,Long> {
     @Override
     public Long convert(String s) {
         //实现 将日期串转成日期类型(格式是yyyy-MM-dd HH:mm:ss)
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
 //转成直接返回,
             // format方法：将日期类型（Date）数据格式化为字符串（String）

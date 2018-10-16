@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+
 import java.util.List;
 @Service
 public class StudentServiceImpl implements StudentService{
@@ -38,8 +39,9 @@ public class StudentServiceImpl implements StudentService{
         return studentMapper.findStudentById(id);
     }
 
+
+
     @Override
     public List<Student> findAllStudent() {
-        return studentMapper.findAllStudent();
-    }
+        return studentMapper.findAllStudent();}
 }

@@ -1,5 +1,6 @@
 package com.task.Mapper;
 import com.task.pojo.Student;
+
 import java.util.List;
 
 public interface StudentMapper {
@@ -14,5 +15,6 @@ public interface StudentMapper {
     //根据ID查询学生数据
     Student findStudentById(long id);
     //查询所有学生数据
-    List<Student> findAllStudent();
+    List <Student> findAllStudent();
+
 }

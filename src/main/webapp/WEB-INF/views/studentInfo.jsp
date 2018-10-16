@@ -39,7 +39,7 @@
       <th>表格创建时间</th>
       <th>表格更新时间</th>
   </tr>
- <c:forEach items="${studentList}" var="student" >
+ <c:forEach items="${pageInfo.list}" var="student" >
      <tr>
          <td>${student.name}</td>
          <td>${student.qq}</td>
@@ -62,5 +62,17 @@
  </c:forEach>
  </tbody>
 </table>
+<center>
+<p>当前 ${pageInfo.pageNum }页,总${pageInfo.pages }
+    页,总 ${pageInfo.total } 条记录</div></p>
+<a href="/findAllStudent?pageNo=${pageInfo.firstPage}">首页</a>
+<c:if test="${pageInfo.hasPreviousPage }">
+    <a href="/findAllStudent?pageNo=${pageInfo.pageNum-1}">上一页</a>
+</c:if>
+<c:if test="${pageInfo.hasNextPage }">
+    <a href="/findAllStudent?pageNo=${pageInfo.pageNum+1}">下一页</a>
+</c:if>
+<a href="/findAllStudent?pageNo=${pageInfo.lastPage}">最后页</a>
+</center>
 </body>
 </html>

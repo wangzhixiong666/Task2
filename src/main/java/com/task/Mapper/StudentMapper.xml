@@ -57,9 +57,8 @@
         select * FROM student where id=#{id}
     </select>
 
-    <!--查询所有的数据-->
+    <!--查询所有学生-->
     <select id="findAllStudent" resultMap="StudentResultMap">
-        SELECT *
-        from student
+        select * from student
     </select>
 </mapper>

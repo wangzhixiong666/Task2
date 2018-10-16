@@ -20,6 +20,13 @@
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
   </properties>
+  <repositories>
+
+    <repository>
+      <id>json-taglib</id>
+      <url>http://maven.jahia.org/maven2</url>
+    </repository>
+  </repositories>
 
   <dependencies>
     <dependency>
@@ -206,6 +213,13 @@
         <scope>provided</scope>
       </dependency>
 
+    <!--JSON-taglib是一套JSP标签库用于在JSP代码中输出JSON格式的数据。-->
+    <dependency>
+      <groupId>atg.taglib.json</groupId>
+      <artifactId>json-taglib</artifactId>
+      <version>0.4.1</version>
+    </dependency>
+
     <!--接口校验-->
     <!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
     <dependency>
@@ -235,7 +249,17 @@
       <version>2.2.4</version>
       <scope>provided</scope>
     </dependency>
+
+    <!--Mybatis的分页插件pageHelper-->
+    <!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper -->
+    <dependency>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper</artifactId>
+      <version>5.1.2</version>
+    </dependency>
+
   </dependencies>
+
   <build>
     <finalName>Task</finalName>
       <plugins>
@@ -311,6 +335,5 @@
         <filtering>true</filtering>
       </resource>
     </resources>
-
   </build>
 </project>
